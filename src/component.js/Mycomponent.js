@@ -14,11 +14,11 @@ class Mycomponent extends React.Component {
   ///DRY don't repeat'
   state = {
     listUser: [
-      { id: 1, name: "minh", age: 30 },
+      { id: 1, name: "minh", age: 16 },
     
       { id: 2, name: "mi", age: 40 },
     
-      { id: 3, name: "my", age: 20 },
+      { id: 3, name: "my", age: 69 },
     
     ],
   };

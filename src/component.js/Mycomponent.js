@@ -11,20 +11,26 @@ class Mycomponent extends React.Component {
 
   //   alert("ok");
   // };
-
-  // onMouseoverHander = (event) => {
-  //   console.log(event.pageX);
-  // };
+  ///DRY don't repeat'
+  state = {
+    listUser: [
+      { id: 1, name: "minh", age: 30 },
+    
+      { id: 2, name: "mi", age: 40 },
+    
+      { id: 3, name: "my", age: 20 },
+    
+    ],
+  };
 
   render() {
-    const myinfor =['a', 'v','c'];
-    
+   
     return (
       <div>
         <UserInfor />
         <br />
         <br />
-        <Displayin4  name="minh" age={26} myinfor={myinfor}/>
+        <Displayin4 listUser={this.state.listUser} />
       </div>
     );
   }

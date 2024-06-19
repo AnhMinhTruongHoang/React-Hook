@@ -3,11 +3,19 @@ import UserInfor from "./Userinfor";
 
 class Displayin4 extends React.Component {
   render() {
-    const {age,name} =  this.props;
+    const { listUser } = this.props;
+    console.log(listUser);
     return (
       <div>
-        <div>my name is {name}</div>
-        <div>my age 23{age}</div>
+        {listUser.map((item) => {
+          return (
+            <div key={item.id}>
+              <div>my name is:{item.name}</div>
+              <div> my age is{item.age}</div>
+              <hr />
+            </div>
+          );
+        })}
       </div>
     );
   }

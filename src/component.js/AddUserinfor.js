@@ -1,40 +1,46 @@
 import React from "react";
 
-class UserInfor extends React.Component {
+class AddUserinfor extends React.Component {
   // Khởi tạo state của component với các thuộc tính name, address và age
   state = {
-    name: "Minh",
-    address: "Dn",
+    name: "",
+    address: "",
     age: 24,
   };
 
-  // Hàm xử lý để cập nhật name trong state
+  // Hàm xử lý để cập nhật name trong state khi input thay đổi
   handerOnChange = (event) => {
     this.setState({
       name: event.target.value,
     });
   };
 
-  // Hàm xử lý để cập nhật age trong state
+  // Hàm xử lý để cập nhật age trong state khi input thay đổi
   handerOnChange2 = (event) => {
     this.setState({
       age: event.target.value,
     });
   };
 
-  // Hàm xử lý khi form được submit để ngăn hành động mặc định và hiển thị thông báo với name
+  // Hàm xử lý khi form được submit để ngăn hành động mặc định và hiển thị thông báo với name và age
   handerOnSubmit = (event) => {
-    event.preventDefault();
-    alert(`${this.state.name} & ${this.state.age}`);
+    event.preventDefault(); // Ngăn hành động mặc định của form khi submit
+    ////////////////////////
+    this.props.handleAddNewUser({
+      id: Math.floor(Math.random() + 1) + "random", // Tạo id ngẫu nhiên
+      name: this.state.name,
+      age: this.state.age,
+    });
+
+    alert(`${this.state.name} & ${this.state.age}`); // Hiển thị thông báo với name và age
   };
 
-  // Hàm render để hiển thị component
+  // Hàm render để hiển thị giao diện của component
   render() {
     return (
       <div>
         {/* Hiển thị giá trị hiện tại của state */}
-        tên tôi là {this.state.name} và tôi đến từ {this.state.address}, tôi{" "}
-        {this.state.age} tuổi
+        tên tôi là {this.state.name} và tôi đến từ {this.state.address}, tôi {this.state.age} tuổi
         {/* Form để cập nhật name và age */}
         <form onSubmit={(event) => this.handerOnSubmit(event)}>
           <label>Tên của bạn:</label>
@@ -61,4 +67,4 @@ class UserInfor extends React.Component {
   }
 }
 
-export default UserInfor;
+export default AddUserinfor;

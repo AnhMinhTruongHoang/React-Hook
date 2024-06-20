@@ -1,35 +1,33 @@
 import React from "react";
-import UserInfor from "./Userinfor";
 import Displayin4 from "./Displayin4";
+import AddUserinfor from "./AddUserinfor";
 
 class Mycomponent extends React.Component {
-  // Onclickhandler = (event) => {
-  //   this.setState({
-  //     name: "eric",
-  //     age: Math.floor(Math.random() * 100 + 1),
-  //   });
-
-  //   alert("ok");
-  // };
-  ///DRY don't repeat'
+  // Khởi tạo state của component với thuộc tính listUser
   state = {
     listUser: [
       { id: 1, name: "minh", age: 16 },
-    
-      { id: 2, name: "mi", age: 40 },
-    
-      { id: 3, name: "my", age: 69 },
-    
+      { id: 2, name: "anh", age: 40 },
+      { id: 3, name: "nhan", age: 69 },
     ],
   };
 
+  // Hàm xử lý để thêm người dùng mới vào danh sách
+  handleAddNewUser = (userobj) => {
+    this.setState({
+      listUser: [userobj, ...this.state.listUser], // Thêm người dùng mới vào đầu danh sách
+    });
+  };
+
+  // Hàm render để hiển thị giao diện của component
   render() {
-   
     return (
       <div>
-        <UserInfor />
+        {/* Component để thêm thông tin người dùng mới */}
+        <AddUserinfor handleAddNewuser={this.handleAddNewUser} />
         <br />
         <br />
+        {/* Component để hiển thị danh sách người dùng */}
         <Displayin4 listUser={this.state.listUser} />
       </div>
     );

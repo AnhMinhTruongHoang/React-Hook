@@ -24,7 +24,7 @@ class Mycomponent extends React.Component {
     return (
       <div>
         {/* Component để thêm thông tin người dùng mới */}
-        <AddUserinfor handleAddNewuser={this.handleAddNewUser} />
+        <AddUserinfor handleAddNewUser={this.handleAddNewUser} />
         <br />
         <br />
         {/* Component để hiển thị danh sách người dùng */}

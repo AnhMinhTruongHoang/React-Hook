@@ -40,7 +40,8 @@ class AddUserinfor extends React.Component {
     return (
       <div>
         {/* Hiển thị giá trị hiện tại của state */}
-        tên tôi là {this.state.name} và tôi đến từ {this.state.address}, tôi {this.state.age} tuổi
+        tên tôi là {this.state.name} và tôi đến từ {this.state.address}, tôi{" "}
+        {this.state.age} tuổi
         {/* Form để cập nhật name và age */}
         <form onSubmit={(event) => this.handerOnSubmit(event)}>
           <label>Tên của bạn:</label>

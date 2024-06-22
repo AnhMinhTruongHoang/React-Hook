@@ -1,7 +1,6 @@
-import React from "react";
-import "./Displayin4.scss"
-
-
+import React, { Fragment } from "react";
+import "./Displayin4.scss";
+import logo from "./../logo.svg";
 
 // Mã dưới đây là vòng lặp để hiển thị danh sách người dùng
 // {listUser.map((item) => {
@@ -42,13 +41,13 @@ import "./Displayin4.scss"
 class Displayin4 extends React.Component {
   // Khởi tạo state cho component với showUser là true
   state = {
-    showUser: true
+    showUser: true,
   };
 
   // Hàm này để thay đổi trạng thái của showUser
   handleShowHide = () => {
     this.setState({
-      showUser: !this.state.showUser
+      showUser: !this.state.showUser,
     });
   };
 
@@ -57,29 +56,45 @@ class Displayin4 extends React.Component {
     const { listUser } = this.props;
 
     return (
-      <div className="Display-infor-container">
-        {/* Nút bấm để hiển thị hoặc ẩn danh sách người dùng */}
-        <div>
-          <button onClick={() => { this.handleShowHide() }}>
-            {this.state.showUser === true ? 'hide list user:' : 'show list user:'}
-          </button>
-        </div>
-
-        {/* Nếu showUser là true, hiển thị danh sách người dùng */}
-        {this.state.showUser && 
+      <Fragment>
+        <div className="Display-infor-container">
+          {/* <img src={logo}/> */}
+          {/* Nút bấm để hiển thị hoặc ẩn danh sách người dùng */}
           <div>
-            {listUser.map((item) => {
-              return (
-                <div key={item.id} className={item.age > 18 ? 'greens' : 'reds'}>
-                  <div>my name is:{item.name}</div>
-                  <div> my age is{item.age}</div>
-                  <hr />
-                </div>
-              );
-            })}
+            <button
+              onClick={() => {
+                this.handleShowHide();
+              }}
+            >
+              {this.state.showUser === true
+                ? "hide list user:"
+                : "show list user:"}
+            </button>
           </div>
-        }
-      </div>
+
+          {/* Nếu showUser là true, hiển thị danh sách người dùng */}
+          {this.state.showUser && (
+            <div>
+              {listUser.map((user) => {
+                return (
+                  <div
+                    key={user.id}
+                    className={user.age > 18 ? "greens" : "reds"}
+                  >
+                    <div>my name is:{user.name}</div>
+                    <div> my age is{user.age}</div>
+                    <div>
+                      
+                      <button onClick={()=> this.props.handleDeleteUser(user.id)}>Delete</button>
+                    </div>
+                    <hr />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </Fragment>
     );
   }
 }

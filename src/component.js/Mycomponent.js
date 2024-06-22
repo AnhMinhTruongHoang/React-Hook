@@ -19,6 +19,14 @@ class Mycomponent extends React.Component {
     })
   }
 
+  handleDeleteUser = (userId) =>{
+    let listUserC = this.state.listUser;
+    listUserC = listUserC.filter(item => item.id !== userId)  
+    this.setState({
+      listUser: listUserC
+    })
+  }
+
   // Hàm render để hiển thị giao diện của component
   render() {
     return (
@@ -28,7 +36,7 @@ class Mycomponent extends React.Component {
         <br />
         <br />
         {/* Component để hiển thị danh sách người dùng */}
-        <Displayin4 listUser={this.state.listUser} />
+        <Displayin4 listUser={this.state.listUser} handleDeleteUser={this.handleDeleteUser} />
       </div>
     );
   }

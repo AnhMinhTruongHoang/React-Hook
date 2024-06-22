@@ -1,4 +1,7 @@
 import React from "react";
+import "./Displayin4.scss"
+
+
 
 // Mã dưới đây là vòng lặp để hiển thị danh sách người dùng
 // {listUser.map((item) => {
@@ -54,7 +57,7 @@ class Displayin4 extends React.Component {
     const { listUser } = this.props;
 
     return (
-      <div>
+      <div className="Display-infor-container">
         {/* Nút bấm để hiển thị hoặc ẩn danh sách người dùng */}
         <div>
           <button onClick={() => { this.handleShowHide() }}>

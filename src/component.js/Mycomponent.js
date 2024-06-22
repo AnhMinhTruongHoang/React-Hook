@@ -15,9 +15,9 @@ class Mycomponent extends React.Component {
   // Hàm xử lý để thêm người dùng mới vào danh sách
   handleAddNewUser = (userobj) => {
     this.setState({
-      listUser: [userobj, ...this.state.listUser], // Thêm người dùng mới vào đầu danh sách
-    });
-  };
+      listUser: [userobj, ...this.state.listUser]
+    })
+  }
 
   // Hàm render để hiển thị giao diện của component
   render() {

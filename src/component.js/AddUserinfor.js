@@ -27,7 +27,7 @@ class AddUserinfor extends React.Component {
     event.preventDefault(); // Ngăn hành động mặc định của form khi submit
     ////////////////////////
     this.props.handleAddNewUser({
-      id: Math.floor(Math.random() + 1) + "random", // Tạo id ngẫu nhiên
+      id: Math.floor(Math.random() + 1) + "random",
       name: this.state.name,
       age: this.state.age,
     });

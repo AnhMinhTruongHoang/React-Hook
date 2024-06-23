@@ -40,9 +40,30 @@ import logo from "./../logo.svg";
 
 class Displayin4 extends React.Component {
   // Khởi tạo state cho component với showUser là true
-  state = {
-    showUser: true,
-  };
+  constructor(props) {
+    console.log("check constructor 0");
+    super(props);
+    this.state = {
+      showUser: true,
+    };
+  }
+
+  // Hàm này sẽ được gọi sau khi component đã được render lần đầu
+  componentDidMount() {
+    setTimeout(() => {
+      document.title = "eric"; // Đổi tiêu đề của trang web sau 3 giây
+    }, 3000);
+  }
+
+  // Hàm này sẽ được gọi sau mỗi lần cập nhật component
+  componentDidUpdate(prevProps, prevStage, snapshot) {
+    console.log("check me", this.props.prevProps);
+    if (this.props.listUser !== prevProps.listUser) {
+      if (this.props.listUser.length === 5) {
+        alert("You got 5 users"); // Hiển thị thông báo nếu có 5 người dùng trong danh sách
+      }
+    }
+  }
 
   // Hàm này để thay đổi trạng thái của showUser
   handleShowHide = () => {
@@ -52,6 +73,7 @@ class Displayin4 extends React.Component {
   };
 
   render() {
+    console.log("check rende");
     // Lấy danh sách người dùng từ props
     const { listUser } = this.props;
 
@@ -67,9 +89,10 @@ class Displayin4 extends React.Component {
               }}
             >
               {this.state.showUser === true
-                ? "hide list user:"
+                ? "hide list user:" // Hiển thị "hide list user" nếu showUser là true
                 : "show list user:"}
             </button>
+            {/* /////// Hiển thị "show list user" nếu showUser là false */}
           </div>
 
           {/* Nếu showUser là true, hiển thị danh sách người dùng */}
@@ -79,13 +102,16 @@ class Displayin4 extends React.Component {
                 return (
                   <div
                     key={user.id}
-                    className={user.age > 18 ? "greens" : "reds"}
+                    className={user.age > 18 ? "greens" : "reds"} // Đổi màu sắc dựa trên độ tuổi
                   >
-                    <div>my name is:{user.name}</div>
-                    <div> my age is{user.age}</div>
+                    <div>my name is: {user.name}</div>
+                    <div>my age is: {user.age}</div>
                     <div>
-                      
-                      <button onClick={()=> this.props.handleDeleteUser(user.id)}>Delete</button>
+                      <button
+                        onClick={() => this.props.handleDeleteUser(user.id)} // Nút xóa người dùng
+                      >
+                        Delete
+                      </button>
                     </div>
                     <hr />
                   </div>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./Displayin4.scss";
 
 const Displayin4 = (props) => {
@@ -8,9 +8,20 @@ const Displayin4 = (props) => {
 
   // Hàm để hiển thị hoặc ẩn danh sách người dùng
   const handleShowHideUser = () => {
-    setShowHideUser(!ShowHideUser)
+    setShowHideUser(!ShowHideUser);
   };
-  
+
+  // setTimeout(() => {
+    //   document.title = "minh hook";
+    // }, 3000);
+
+  useEffect(() => {
+    if(listUser.length === 0){
+      alert('you delete all users')
+    }
+    
+  }, [listUser]);
+
   return (
     <Fragment>
       <div className="Display-infor-container">

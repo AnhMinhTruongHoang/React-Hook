@@ -12,14 +12,14 @@ const Header = () => {
         <Navbar.Brand href="#home">Anh Minh Web</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+          
           <Nav className="me-auto">
+            
             <Link to= '/'      className="nav-link"> Home </Link>
             <Link to= 'users'  className="nav-link"> Users </Link>
             <Link to='Admins'  className="nav-link"> Admin </Link>
             
-            {/* <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/users">User</Nav.Link>
-            <Nav.Link href="/admins">Admin</Nav.Link> */}
+         
           </Nav>
 
           <Nav>

@@ -1,0 +1,128 @@
+% import React, { Fragment } from "react";
+% import "./Displayin4.scss";
+% import logo from "./../logo.svg";
+
+% // Mã dưới đây là vòng lặp để hiển thị danh sách người dùng
+% // {listUser.map((item) => {
+% //   return (
+% //     <div key={item.id}>
+% //       <div>my name is:{item.name}</div>
+% //       <div> my age is{item.age}</div>
+% //       <hr />
+% //     </div>
+% //   );
+% // })}
+
+% //////
+
+% // Mã dưới đây là điều kiện if/else để thay đổi màu sắc dựa trên độ tuổi
+% /* <div>
+% {listUser.map((item) => {
+%   if (item.age > 18) {
+%     return (
+%       <div key={item.id} className="reds">
+%         <div>my name is:{item.name}</div>
+%         <div> my age is{item.age}</div>
+%         <hr />
+%       </div>
+%     );
+%   } else {
+%     return (
+%       <div key={item.id} className="greens">
+%         <div>my name is:{item.name}</div>
+%         <div> my age is{item.age}</div>
+%         <hr />
+%       </div>
+%     );
+%   }
+% })}
+% </div> */
+
+% class Displayin4 extends React.Component {
+%   // Khởi tạo state cho component với showUser là true
+%   constructor(props) {
+%     console.log("check constructor 0");
+%     super(props);
+%     this.state = {
+%       showUser: true,
+%     };
+%   }
+
+%   // Hàm này sẽ được gọi sau khi component đã được render lần đầu
+%   componentDidMount() {
+%     setTimeout(() => {
+%       document.title = "eric"; // Đổi tiêu đề của trang web sau 3 giây
+%     }, 3000);
+%   }
+
+%   // Hàm này sẽ được gọi sau mỗi lần cập nhật component
+%   componentDidUpdate(prevProps, prevStage, snapshot) {
+%     console.log("check me", this.props.prevProps);
+%     if (this.props.listUser !== prevProps.listUser) {
+%       if (this.props.listUser.length === 5) {
+%         alert("You got 5 users"); // Hiển thị thông báo nếu có 5 người dùng trong danh sách
+%       }
+%     }
+%   }
+
+%   // Hàm này để thay đổi trạng thái của showUser
+%   handleShowHide = () => {
+%     this.setState({
+%       showUser: !this.state.showUser,
+%     });
+%   };
+
+%   render() {
+%     console.log("check rende");
+%     // Lấy danh sách người dùng từ props
+%     const { listUser } = this.props;
+
+%     return (
+%       <Fragment>
+%         <div className="Display-infor-container">
+%           {/* <img src={logo}/> */}
+%           {/* Nút bấm để hiển thị hoặc ẩn danh sách người dùng */}
+%           <div>
+%             <button
+%               onClick={() => {
+%                 this.handleShowHide();
+%               }}
+%             >
+%               {this.state.showUser === true
+%                 ? "hide list user:" // Hiển thị "hide list user" nếu showUser là true
+%                 : "show list user:"}
+%             </button>
+%             {/* /////// Hiển thị "show list user" nếu showUser là false */}
+%           </div>
+
+%           {/* Nếu showUser là true, hiển thị danh sách người dùng */}
+%           {this.state.showUser && (
+%             <div>
+%               {listUser.map((user) => {
+%                 return (
+%                   <div
+%                     key={user.id}
+%                     className={user.age > 18 ? "greens" : "reds"} // Đổi màu sắc dựa trên độ tuổi
+%                   >
+%                     <div>my name is: {user.name}</div>
+%                     <div>my age is: {user.age}</div>
+%                     <div>
+%                       <button
+%                         onClick={() => this.props.handleDeleteUser(user.id)} // Nút xóa người dùng
+%                       >
+%                         Delete
+%                       </button>
+%                     </div>
+%                     <hr />
+%                   </div>
+%                 );
+%               })}
+%             </div>
+%           )}
+%         </div>
+%       </Fragment>
+%     );
+%   }
+% }
+
+% export default Displayin4;

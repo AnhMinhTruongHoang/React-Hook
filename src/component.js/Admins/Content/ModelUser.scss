@@ -1,0 +1,52 @@
+.manage-user-container {
+  padding: 10px;
+  .users-content {
+  }
+  .btn-add-new {
+   margin: 15px 0;
+  }
+  .tittle {
+    font-weight: 600;
+    font: size 20px;
+  }
+}
+
+.model-add-user {
+  .img-preview {
+    height: 150px;
+    border: 1px groove lightcyan;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+  .label-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid lightseagreen;
+    width: fit-content;
+    padding: 3px 10px;
+    border-radius: 5px;
+    background: deepskyblue;
+    cursor: pointer;
+    &:hover {
+      background-color: aquamarine;
+    }
+  }
+}
+.admin-label {
+  color: blue;
+}
+
+.user-label {
+  color: black;
+}
+

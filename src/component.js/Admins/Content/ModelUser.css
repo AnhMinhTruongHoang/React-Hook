@@ -1,0 +1,40 @@
+.manage-user-container {
+  padding: 10px;
+}
+.manage-user-container .btn-add-new {
+  margin: 15px 0;
+}
+.manage-user-container .tittle {
+  font-weight: 600;
+  font: size 20px;
+}
+
+.model-add-user .img-preview {
+  height: 150px;
+  border: 1px groove lightcyan;
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+}
+.model-add-user .img-preview img {
+  max-height: 100%;
+  max-width: 100%;
+}
+.model-add-user .label-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid lightseagreen;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: deepskyblue;
+  cursor: pointer;
+}
+.model-add-user .label-upload:hover {
+  background-color: aquamarine;
+}/*# sourceMappingURL=ModelUser.css.map */

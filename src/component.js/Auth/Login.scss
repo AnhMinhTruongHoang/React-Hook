@@ -1,4 +1,13 @@
 .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Đặt chiều cao của container là 100% chiều cao của màn hình */
+  background: url("https://i.redd.it/j0k70dc1yf9b1.gif") no-repeat center center/cover;
+  color: #fff; /* Màu chữ trắng để dễ đọc trên nền tối */
+ 
+ 
   .header {
     height: 45px;
     text-align: right;
@@ -7,7 +16,8 @@
     justify-content: flex-end;
     display:  flex;
     padding: 0 100px
-
+   
+  
    
   }
   
@@ -76,6 +86,7 @@ background: #eee;
   transform: translateY(-50%);
   color: #aaa;
 }
+
 
 
 

@@ -1,6 +1,14 @@
 import Hvid from "../../assets/vid2.mp4";
+import { useSelector } from "react-redux";
+import userReducer from "../../redux/reducer/userReducer";
 
 const HomePage = (props) => {
+
+  const account = useSelector(state => state.user.account); 
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);  /// lay data ve tu redux
+
+  
+  
   return (
     <div className="homepage-container">
       <video autoPlay muted loop>

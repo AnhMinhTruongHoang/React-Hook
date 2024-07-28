@@ -1,9 +1,12 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const account = useSelector((state) => state.user.account);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);   /// lay data ve tu redux
+  const navigate = useNavigate(); 
 
   const handerLogin = () => {
     navigate("/Login");
@@ -34,15 +37,22 @@ const Header = () => {
           </Nav>
 
           <Nav>
-            <button className="btn-login" onClick={() => handerLogin()}>
-              {" "}
-              Login{" "}
-            </button>
+            {isAuthenticated === false ? (
+              <>
+                <button className="btn-login" onClick={() => handerLogin()}>
+                  Login
+                </button>
 
-            <button className="btn-sighup" onClick={() => handerSigtUp()}>
-              {" "}
-              Sign up{" "}
-            </button>
+                <button className="btn-sighup" onClick={() => handerSigtUp()}>
+                  Sign up
+                </button>
+              </>
+            ) : (
+              <NavDropdown title="Settings" id="basic-nav-dropdown">
+                <NavDropdown.Item>Log out</NavDropdown.Item>
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -51,3 +61,4 @@ const Header = () => {
 };
 
 export default Header;
+

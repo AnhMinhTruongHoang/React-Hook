@@ -1,9 +1,10 @@
 import React from "react";
+import "./ModelUser.scss";
 
 const DashBroad =  (props) => {
 
     return(
-        <div>DashBroad</div>
+        <div className="dashbroad" ></div>
     )
 }
 export default DashBroad;

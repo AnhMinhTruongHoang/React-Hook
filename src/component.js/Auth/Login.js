@@ -3,37 +3,44 @@ import "./Login.scss"; // Import file CSS cho component này
 import { useNavigate } from "react-router-dom"; // Import useNavigate để điều hướng trang
 import { postLogin } from "../../Service/apiServices"; // Import hàm postLogin từ dịch vụ API
 import { toast } from "react-toastify"; // Import thư viện toast để hiển thị thông báo
+import { useDispatch } from "react-redux"; // Import useDispatch từ thư viện react-redux
+import { doLogin } from "../../redux/action/userAction"; // Import hàm doLogin từ tệp userAction
 
 const Login = (props) => {
   const [email, setemail] = useState(""); // Khai báo state cho email
   const [password, setpassword] = useState(""); // Khai báo state cho password
   const navigate = useNavigate(); // Khai báo useNavigate để điều hướng trang
+  const dispatch = useDispatch(); // Khai báo useDispatch để dispatch các hành động redux
 
-  const handerLogin = async () => { // Hàm xử lý đăng nhập
+  const handerLogin = async () => {
+    // Hàm xử lý đăng nhập
     let data = await postLogin(email, password); // Gọi hàm postLogin và đợi kết quả
-    if (data && data.EC === 0) { // Kiểm tra nếu đăng nhập thành công
+    if (data && data.EC === 0) {
+      // Kiểm tra nếu đăng nhập thành công
+      dispatch(doLogin(data)); // Dispatch hành động doLogin tu file userAction.js với dữ liệu nhận được
       toast.success(data.EM); // Hiển thị thông báo thành công
       navigate("/"); // Điều hướng về trang chủ
     }
-    if (data && +data.EC !== 0) { // Kiểm tra nếu đăng nhập thất bại
+    if (data && +data.EC !== 0) {
+      // Kiểm tra nếu đăng nhập thất bại
       toast.error(data.EM); // Hiển thị thông báo lỗi
     }
   };
 
   return (
-    <div 
-      className="login-container"
-     
-    >
+    <div className="login-container">
       <div className="header">
-        <span>Don't have an account yet ?</span> {/* Hiển thị thông báo nếu chưa có tài khoản */}
-        <button onClick={() => navigate('/Resgisterss')}><i> Sign Up</i></button> {/* Điều hướng đến trang đăng ký */}
+        <span>Don't have an account yet ?</span>{" "}
+        {/* Hiển thị thông báo nếu chưa có tài khoản */}
+        <button onClick={() => navigate("/Resgisterss")}>
+          <i> Sign Up</i>
+        </button>{" "}
+        {/* Điều hướng đến trang đăng ký */}
       </div>
-
-      <div className="title col-4 mx-auto">AnhMinhWeb</div> {/* Tiêu đề của trang đăng nhập */}
-
-      <div className="welcome col-4 mx-auto">Hello, who this ?</div> {/* Thông báo chào mừng */}
-
+      <div className="title col-4 mx-auto">AnhMinhWeb</div>{" "}
+      {/* Tiêu đề của trang đăng nhập */}
+      <div className="welcome col-4 mx-auto">Hello, who this ?</div>{" "}
+      {/* Thông báo chào mừng */}
       <div className="content-form col-4 mx-auto">
         <div className="form-group">
           <label>Email</label> {/* Nhãn cho input email */}
@@ -44,7 +51,6 @@ const Login = (props) => {
             className="form-control"
           ></input>
         </div>
-
         <div className="form-group">
           <label>Password</label> {/* Nhãn cho input password */}
           <input
@@ -54,25 +60,25 @@ const Login = (props) => {
             className="form-control"
           ></input>
         </div>
-
-        <span className="fp col-4 mx-auto"> Forgot Password ? </span> {/* Liên kết đến trang quên mật khẩu */}
-
+        <span className="fp col-4 mx-auto"> Forgot Password ? </span>{" "}
+        {/* Liên kết đến trang quên mật khẩu */}
         <div className="btn-submit col-4 mx-auto">
-          <button onClick={() => handerLogin()}>Login</button> {/* Gọi hàm handerLogin khi nhấn nút */}
+          <button onClick={() => handerLogin()}>Login</button>{" "}
+          {/* Gọi hàm handerLogin khi nhấn nút */}
         </div>
       </div>
-
       <div className="text-center pt-4">
         <span
           className="back"
-          style={{ cursor: "pointer" , color: 'blue' }}
+          style={{ cursor: "pointer", color: "blue" }}
           onClick={() => {
             navigate("/");
           }}
         >
           {" "}
           &#60;&#60; Go to HomePage
-        </span> {/* Liên kết trở về trang chủ */}
+        </span>{" "}
+        {/* Liên kết trở về trang chủ */}
       </div>
     </div>
   );

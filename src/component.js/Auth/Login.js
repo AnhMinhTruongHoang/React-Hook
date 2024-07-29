@@ -5,28 +5,55 @@ import { postLogin } from "../../Service/apiServices"; // Import hàm postLogin 
 import { toast } from "react-toastify"; // Import thư viện toast để hiển thị thông báo
 import { useDispatch } from "react-redux"; // Import useDispatch từ thư viện react-redux
 import { doLogin } from "../../redux/action/userAction"; // Import hàm doLogin từ tệp userAction
+import { ImSpinner9 } from "react-icons/im";
+
 
 const Login = (props) => {
   const [email, setemail] = useState(""); // Khai báo state cho email
   const [password, setpassword] = useState(""); // Khai báo state cho password
   const navigate = useNavigate(); // Khai báo useNavigate để điều hướng trang
   const dispatch = useDispatch(); // Khai báo useDispatch để dispatch các hành động redux
+  const [isloading, setisloading] = useState(false);
+
+  // Hàm kiểm tra tính hợp lệ của email
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  
 
   const handerLogin = async () => {
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("Email không hợp lệ");
+      return;
+    }
+
+    if (!password) {
+      toast.error("Mật khẩu không hợp lệ");
+      return;
+    }
+      setisloading(true);
     // Hàm xử lý đăng nhập
     let data = await postLogin(email, password); // Gọi hàm postLogin và đợi kết quả
     if (data && data.EC === 0) {
       // Kiểm tra nếu đăng nhập thành công
       dispatch(doLogin(data)); // Dispatch hành động doLogin tu file userAction.js với dữ liệu nhận được
       toast.success(data.EM); // Hiển thị thông báo thành công
-      navigate("/"); // Điều hướng về trang chủ
+      setisloading(false);
+      // navigate("/"); // Điều hướng về trang chủ
     }
     if (data && +data.EC !== 0) {
       // Kiểm tra nếu đăng nhập thất bại
       toast.error(data.EM); // Hiển thị thông báo lỗi
+      setisloading(false);
     }
-  };
-
+  }
+    
   return (
     <div className="login-container">
       <div className="header">
@@ -63,7 +90,10 @@ const Login = (props) => {
         <span className="fp col-4 mx-auto"> Forgot Password ? </span>{" "}
         {/* Liên kết đến trang quên mật khẩu */}
         <div className="btn-submit col-4 mx-auto">
-          <button onClick={() => handerLogin()}>Login</button>{" "}
+          <button onClick={() => handerLogin()} disabled={isloading}>
+           
+            {isloading === true && <ImSpinner9 className="loader-Icon" />} <span>Login</span>
+          </button>
           {/* Gọi hàm handerLogin khi nhấn nút */}
         </div>
       </div>

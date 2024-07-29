@@ -62,12 +62,9 @@ const getUserWithPage = (page, limit) => {
   ); /// truyen data den TableUser.js
 };
 
-const postLogin= (email,password) => {
-  return axios.post(
-    `/api/v1/login` , {email,password}
-  ); 
-}
-
+const postLogin = (email, password) => {
+  return axios.post(`/api/v1/login`, { email, password, delay: 5000 });
+};
 
 export {
   postCreateUser,

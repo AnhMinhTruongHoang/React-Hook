@@ -5,7 +5,7 @@ import { postLogin } from "../../Service/apiServices"; // Import hàm postLogin 
 import { toast } from "react-toastify"; // Import thư viện toast để hiển thị thông báo
 import { useDispatch } from "react-redux"; // Import useDispatch từ thư viện react-redux
 import { doLogin } from "../../redux/action/userAction"; // Import hàm doLogin từ tệp userAction
-import { ImSpinner9 } from "react-icons/im";
+import { ImSpinner9 } from "react-icons/im"; //// icon xoay o nut login
 
 
 const Login = (props) => {
@@ -13,7 +13,7 @@ const Login = (props) => {
   const [password, setpassword] = useState(""); // Khai báo state cho password
   const navigate = useNavigate(); // Khai báo useNavigate để điều hướng trang
   const dispatch = useDispatch(); // Khai báo useDispatch để dispatch các hành động redux
-  const [isloading, setisloading] = useState(false);
+  const [isloading, setisloading] = useState(false);  /// vong xoay o nut loading
 
   // Hàm kiểm tra tính hợp lệ của email
   const validateEmail = (email) => {
@@ -37,15 +37,15 @@ const Login = (props) => {
       toast.error("Mật khẩu không hợp lệ");
       return;
     }
-      setisloading(true);
+      setisloading(true);    ///set hien vong xoay login
     // Hàm xử lý đăng nhập
     let data = await postLogin(email, password); // Gọi hàm postLogin và đợi kết quả
     if (data && data.EC === 0) {
       // Kiểm tra nếu đăng nhập thành công
       dispatch(doLogin(data)); // Dispatch hành động doLogin tu file userAction.js với dữ liệu nhận được
       toast.success(data.EM); // Hiển thị thông báo thành công
-      setisloading(false);
-      // navigate("/"); // Điều hướng về trang chủ
+      setisloading(false);  /// hien khi  dang login
+      navigate("/"); // Điều hướng về trang chủ
     }
     if (data && +data.EC !== 0) {
       // Kiểm tra nếu đăng nhập thất bại
@@ -92,9 +92,9 @@ const Login = (props) => {
         <div className="btn-submit col-4 mx-auto">
           <button onClick={() => handerLogin()} disabled={isloading}>
            
-            {isloading === true && <ImSpinner9 className="loader-Icon" />} <span>Login</span>
+            {isloading === true && <ImSpinner9 className="loader-Icon" />} <span>Login</span> 
           </button>
-          {/* Gọi hàm handerLogin khi nhấn nút */}
+          {/* Gọi hàm handerLogin khi nhấn nút + css tao vong' xoay  */}
         </div>
       </div>
       <div className="text-center pt-4">

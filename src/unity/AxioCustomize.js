@@ -1,4 +1,20 @@
 import axios from "axios"; // Nhập thư viện axios để sử dụng cho các yêu cầu HTTP
+import nProgress from "nprogress"; /// them thu vien thanh loading ngang
+
+
+  nProgress.configure({ //  css NProgress
+  showSpinner: false,
+  // easing: 'ease',
+  // speed: 500,
+  // trickleRate: 0.5,
+  // easing: 'ease',
+  // speed: 200,
+  // trickle: true,
+  // trickleRate: 0.02,
+  trickleSpeed: 100,
+});
+
+
 
 // Tạo một instance của axios với các thiết lập cấu hình
 const instance = axios.create({
@@ -7,11 +23,10 @@ const instance = axios.create({
   // headers: {'X-Custom-Header': 'foobar'} // Thiết lập các header tùy chỉnh cho yêu cầu HTTP (tùy chọn)
 });
 
-////
-
 // Thêm một interceptor cho các yêu cầu
 instance.interceptors.request.use(
   function (config) {
+    nProgress.start(); //loading
     // Làm gì đó trước khi yêu cầu được gửi đi
     return config; // Trả về cấu hình yêu cầu để tiếp tục gửi yêu cầu
   },
@@ -24,6 +39,7 @@ instance.interceptors.request.use(
 // Thêm một interceptor cho các phản hồi
 instance.interceptors.response.use(
   function (response) {
+    nProgress.done(); // loading
     // Bất kỳ mã trạng thái nào nằm trong phạm vi 2xx sẽ kích hoạt hàm này
     // Làm gì đó với dữ liệu phản hồi
     return response && response.data ? response.data : response; // Trả về phản hồi để tiếp tục xử lý phản hồi

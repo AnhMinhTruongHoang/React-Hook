@@ -12,6 +12,7 @@
     "console-browserify": "^1.2.0",
     "git-filter-repo": "^0.0.30",
     "lodash": "^4.17.21",
+    "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-bootstrap": "^2.10.3",
     "react-dom": "18.2.0",

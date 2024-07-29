@@ -27,14 +27,14 @@ const Login = (props) => {
   
 
   const handerLogin = async () => {
-    const isValidEmail = validateEmail(email);
+    const isValidEmail = validateEmail(email);     ///neu khong gmail hop le 
     if (!isValidEmail) {
       toast.error("Email không hợp lệ");
       return;
     }
 
     if (!password) {
-      toast.error("Mật khẩu không hợp lệ");
+      toast.error("Mật khẩu không hợp lệ");  /// neu password khong hop le
       return;
     }
       setisloading(true);    ///set hien vong xoay login

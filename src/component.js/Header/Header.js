@@ -1,16 +1,33 @@
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Service/apiServices";
+import { toast } from "react-toastify";
+import { doLogout } from "../../redux/action/userAction";
 
 const Header = () => {
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);   /// lay data ve tu redux
+  const dispatch = useDispatch();
   const navigate = useNavigate(); 
 
   const handerLogin = () => {
     navigate("/Login");
   };
+
+  const handerLogOut = async() => {
+     let rs = await logout(account.email, account.refresh_token)
+      if(rs && rs.EC === 0){
+        dispatch(doLogout())
+        navigate('/Login')
+      }
+      else{
+        toast.error(rs.EM);
+      }
+     
+     
+    }
 
   const handerSigtUp = () => {
     navigate("/Resgisterss");
@@ -49,8 +66,9 @@ const Header = () => {
               </>
             ) : (
               <NavDropdown title="Settings" id="basic-nav-dropdown">
-                <NavDropdown.Item>Log out</NavDropdown.Item>
+
                 <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handerLogOut()}>Log out</NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>

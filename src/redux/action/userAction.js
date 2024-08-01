@@ -1,10 +1,17 @@
 export const FETCH_USER_LOGiN_SUCCESS = "FETCH_USER_LOGiN_SUCCESS";
+export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
 
 // Hàm doLogin nhận tham số data và trả về một đối tượng hành động (action object)
 export const doLogin = (data) => {
   return {
     type: FETCH_USER_LOGiN_SUCCESS, // Đây là loại hành động, xác định loại sự kiện đang xảy ra
     payload: data, // Dữ liệu được đính kèm với hành động, thường là thông tin người dùng đăng nhập thành công
+  };
+};
+
+export const doLogout = () => {
+  return {
+    type: USER_LOGOUT_SUCCESS, // Đây là loại hành động, xác định loại sự kiện đang xảy ra
   };
 };
 

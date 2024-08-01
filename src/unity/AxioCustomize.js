@@ -1,8 +1,9 @@
 import axios from "axios"; // Nhập thư viện axios để sử dụng cho các yêu cầu HTTP
 import nProgress from "nprogress"; /// them thu vien thanh loading ngang
+import { store } from "../redux/store";
 
-
-  nProgress.configure({ //  css NProgress
+nProgress.configure({
+  //  css NProgress
   showSpinner: false,
   // easing: 'ease',
   // speed: 500,
@@ -14,8 +15,6 @@ import nProgress from "nprogress"; /// them thu vien thanh loading ngang
   trickleSpeed: 100,
 });
 
-
-
 // Tạo một instance của axios với các thiết lập cấu hình
 const instance = axios.create({
   baseURL: "http://localhost:8081/", // Thiết lập URL gốc cho tất cả các yêu cầu HTTP
@@ -26,6 +25,9 @@ const instance = axios.create({
 // Thêm một interceptor cho các yêu cầu
 instance.interceptors.request.use(
   function (config) {
+    console.log('>>>check store:', store.getState())
+    const access_token = store?.getState()?.user?.account?.access_token;
+    config.headers["Authorization"] = "Bearer " + access_token;
     nProgress.start(); //loading
     // Làm gì đó trước khi yêu cầu được gửi đi
     return config; // Trả về cấu hình yêu cầu để tiếp tục gửi yêu cầu

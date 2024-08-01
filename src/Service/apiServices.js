@@ -66,6 +66,15 @@ const postLogin = (email, password) => {
   return axios.post(`/api/v1/login`, { email, password, delay: 5000 });
 };
 
+
+const getQuizByUser = () => {
+  return axios.get('/api/v1/quiz-by-participant');
+}
+
+const logout = (email,refresh_token ) => {
+    return axios.post('/api/v1/logout', {email,refresh_token});
+}
+
 export {
   postCreateUser,
   getAllUser,
@@ -75,4 +84,6 @@ export {
   getUserWithPage,
   postLogin,
   postRegister,
+  getQuizByUser,
+  logout,
 }; // Xuất hàm postCreateUser để có thể sử dụng ở nơi khác

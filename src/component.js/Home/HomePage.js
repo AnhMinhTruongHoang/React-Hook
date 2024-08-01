@@ -1,12 +1,14 @@
 import Hvid from "../../assets/vid2.mp4";
 import { useSelector } from "react-redux";
 import userReducer from "../../redux/reducer/userReducer";
+import { useNavigate } from "react-router-dom";
+
 
 const HomePage = (props) => {
 
-  const account = useSelector(state => state.user.account); 
+  // const account = useSelector(state => state.user.account); 
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);  /// lay data ve tu redux
-
+  const navigate = useNavigate();
   
   
   return (
@@ -20,7 +22,16 @@ const HomePage = (props) => {
           Get more data—like signups, feedback, and anything else—with forms
           designed to be refreshingly different.
         </div>
-        <button className="b1">Get started!</button>
+          {isAuthenticated === true ? 
+               <button onClick={()=> navigate('/users')} className="b1"> Doing Quiz Now !</button>
+            :
+             
+             <button onClick={()=> navigate('/login')} className="b1">
+                Get started!
+            </button>
+          
+          }
+       
       </div>
     </div>
   );

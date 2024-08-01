@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getQuizByUser } from "../../Service/apiServices";
+import "../Users/Quiz.scss"
 
 const ListQuiz = (props) => {
   const [arrQuiz, setArrQuiz] = useState([]);
@@ -18,7 +19,7 @@ const ListQuiz = (props) => {
 
   ////////
   return (
-    <div className="list-quiz-container">
+    <div className="list-quiz-container container">
       {arrQuiz &&  (arrQuiz.length > 0) &&
         arrQuiz.map((quiz, index) => {
           return (
@@ -27,9 +28,9 @@ const ListQuiz = (props) => {
               className="card"
               style={{ width: "18rem" }}
             >
-              <img src={quiz.image} className="card-img-top" alt="..." />
+              <img src={`data:image/jpeg;base64,${quiz.image}`} className="card-img-top" alt="..." />
               <div className="card-body">
-                <h5 className="card-title">Quiz{index + 1}</h5>
+                <h5 className="card-title"> Quiz {index + 1}</h5>
                 <p className="card-text">{quiz.description}</p>
                 <button href="#" className="btn btn-primary">
                   Start Now
@@ -38,6 +39,11 @@ const ListQuiz = (props) => {
             </div>
           );
         })}
+        {arrQuiz && arrQuiz.length === 0 &&
+          <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="You don't have any quiz now ...."  style={{display: 'block', justifyContent: 'center', alignItems: 'center', textAlign: 'center', margin: 'auto', width: '100%'}}/> 
+
+          
+        }
     </div>
   );
 };

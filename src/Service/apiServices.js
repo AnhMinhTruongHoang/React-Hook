@@ -75,6 +75,10 @@ const logout = (email,refresh_token ) => {
     return axios.post('/api/v1/logout', {email,refresh_token});
 }
 
+const getDataQuiz = (id) => {
+  return axios.get(`/api/v1/questions-by-quiz?quizId=${id}`) // goi api lay data bai quiz bang id bai'
+}
+
 export {
   postCreateUser,
   getAllUser,
@@ -86,4 +90,5 @@ export {
   postRegister,
   getQuizByUser,
   logout,
+  getDataQuiz,
 }; // Xuất hàm postCreateUser để có thể sử dụng ở nơi khác

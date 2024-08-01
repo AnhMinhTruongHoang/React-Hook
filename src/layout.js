@@ -10,6 +10,13 @@ import Resgisterss from "./component.js/Auth/Registers";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ListQuiz from "./component.js/Users/ListQuiz";
+import DetailQuiz from "./component.js/Users/DetailQuiz";
+
+  const NotFound = () => {
+    return(
+      <div className=" container mt-3 alert alert-danger" style={{textAlign: 'center'}}> Not Found 404 </div>  //// bao loi 404 khi k0 tim duoc Route
+    )
+  }
 
 const Layout = (props) => {
   return (
@@ -19,6 +26,9 @@ const Layout = (props) => {
           <Route index element={<HomePage />} />
           <Route path="users" element={<ListQuiz />} />
         </Route>
+
+        <Route path="/quiz/:id" element={<DetailQuiz />} />
+
         <Route path="/admins" element={<Admin />}>
           <Route index element={<DashBroad />} />
           <Route path="manage-users" element={<ManageUsers />} />
@@ -26,6 +36,8 @@ const Layout = (props) => {
 
         <Route path="/Login" element={<Login />} />
         <Route path="/Resgisterss" element={<Resgisterss />} />
+        <Route path="*" element={<NotFound />} />
+
       </Routes>
 
       <ToastContainer

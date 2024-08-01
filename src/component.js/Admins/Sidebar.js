@@ -42,8 +42,8 @@ const SideBar = (props) => {
               whiteSpace: "nowrap",
             }}
           >
-            <FaReact size={"3em"} color="blue" />
-            <span style={{color: 'green', cursor:'pointer'}} onClick={() => navigate('/')}> M1nh</span>
+            <FaReact  onClick={() => navigate('/')} size={"3em"} color="blue"  cursor={'pointer'} />
+            <span style={{color: 'green', cursor:'pointer',}} onClick={() => navigate('/')}> HomePage</span>
           </div>
         </SidebarHeader>
 
@@ -86,7 +86,7 @@ const SideBar = (props) => {
               className="sidebar-btn"
               rel="noopener noreferrer"
             >
-              <FaGithub style={{color: 'green'}} />
+              <FaGithub size={'2em'} color="green" />
               <span
                 style={{
                   whiteSpace: "nowrap",

@@ -14,7 +14,7 @@ import DetailQuiz from "./component.js/Users/DetailQuiz";
 
   const NotFound = () => {
     return(
-      <div className=" container mt-3 alert alert-danger" style={{textAlign: 'center'}}> Not Found 404 </div>  //// bao loi 404 khi k0 tim duoc Route
+      <div className=" container mt-3  alert alert-danger" style={{textAlign: 'center'}}> Not Found 404 </div>  //// bao loi 404 khi k0 tim duoc Route
     )
   }
 
@@ -27,7 +27,7 @@ const Layout = (props) => {
           <Route path="users" element={<ListQuiz />} />
         </Route>
 
-        <Route path="/quiz/:id" element={<DetailQuiz />} />
+        <Route path="/quiz/:id" element={< DetailQuiz />} />
 
         <Route path="/admins" element={<Admin />}>
           <Route index element={<DashBroad />} />

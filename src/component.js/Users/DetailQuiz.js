@@ -53,24 +53,38 @@ const DetailQuiz = (props) => {
 
   console.log("check data quiz", dataQuiz);
 
+  const handlePrev = () => {
+    if (index - 1 < 0) return;
+    setIndex(index - 1);
+  };
+
+  const handleNext = () => {
+    if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
+  };
+
   // JSX để render giao diện của component
   return (
     <div className="detail-quiz-container">
       <div className="left-content">
         <div className="title"></div>
         {location?.state?.quizTitle}
-        <hr style={{color: 'red'}} />
+        <hr style={{ color: "red" }} />
         <div className="q-body">
           <img />
         </div>
         <div className="q-content">
-          <Question 
-          index={index}
-          data= { dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : [] } />
+          <Question
+            index={index}
+            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
+          />
         </div>
         <div className="footer">
-          <button className="btn btn-secondary">Prev</button>
-          <button className="btn btn-primary ">Next</button>
+          <button className="btn btn-secondary" onClick={() => handlePrev()}>
+            Prev
+          </button>
+          <button className="btn btn-primary " onClick={() => handleNext()}>
+            Next
+          </button>
         </div>
       </div>
 

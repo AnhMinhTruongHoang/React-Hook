@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { getDataQuiz } from "../../Service/apiServices";
 import _ from "lodash";
 import "./Quiz.scss";
@@ -15,6 +14,7 @@ const DetailQuiz = (props) => {
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
   // Sử dụng hook useEffect để thực hiện một số hành động khi component được render hoặc khi quizId thay đổi
+
   useEffect(() => {
     fetchQuestions(); // Gọi hàm fetchQuestions khi component được render hoặc quizId thay đổi
   }, [quizId]); // Mảng phụ thuộc bao gồm quizId
@@ -31,42 +31,42 @@ const DetailQuiz = (props) => {
         // `key` is group's name (color), `value` is the array of objects
         .map((value, key) => {
           let answers = [];
-          let questionDescription, image = null;
-         
-          value.forEach((item , index)=> {
-            if(index === 0){
-              questionDescription=item.description;
-              image =item.image;
+          let questionDescription,
+            image = null;
+
+          value.forEach((item, index) => {
+            if (index === 0) {
+              questionDescription = item.description;
+              image = item.image;
             }
             answers.push(item.answers);
-            console.log('item answer', item.answers)
-          })
-          console.log("value", value, "key", key);
-          
-          
-          return { questionId: key, answers, questionDescription , image };
+          });
+
+          return { questionId: key, answers, questionDescription, image };
         })
 
         .value();
       console.log(data);
+      setDataQuiz(data);
     }
   };
+
+  console.log("check data quiz", dataQuiz);
 
   // JSX để render giao diện của component
   return (
     <div className="detail-quiz-container">
       <div className="left-content">
         <div className="title"></div>
-        Quiz {quizId}: {location?.state?.quizTitle}
-        <hr style={{ color: "red" }} />
+        {location?.state?.quizTitle}
+        <hr style={{color: 'red'}} />
         <div className="q-body">
           <img />
         </div>
         <div className="q-content">
-          <Question
-            index={index}
-            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
-          />
+          <Question 
+          index={index}
+          data= { dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : [] } />
         </div>
         <div className="footer">
           <button className="btn btn-secondary">Prev</button>

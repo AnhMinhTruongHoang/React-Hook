@@ -13,7 +13,7 @@ const ListQuiz = (props) => {
   }, []); // Mảng phụ thuộc rỗng để chỉ gọi khi component được render lần đầu
 
   // Hàm lấy dữ liệu quiz từ API
-  const getQuizData = async () => {
+  const getQuizData = async() => {
     const res = await getQuizByUser(); // Gọi API lấy danh sách quiz
     console.log("res:", res); // In ra kết quả nhận được từ API
     if (res && res.EC === 0) {
@@ -46,15 +46,12 @@ const ListQuiz = (props) => {
                 {/* //   Hiển thị tiêu đề quiz */}
                 <p className="card-text">{quiz.description}</p>
                 {/* // Hiển thị mô tả quiz */}
-                <button  // nut bat dau
-                  onClick={() =>
-                    navigate(`/quiz/${quiz.id}`, {
-                      state: { quizTitle: quiz.description },
-                    })
-                  }
-                  className="btn btn-primary"
+                <button  className="btn btn-primary" // nut bat dau
+
+                  onClick={()=> navigate(`/quiz/${quiz.id}`, {state: { quizTitle: quiz.description }})}
+                 
                 >
-                  Start Now 
+                  Start Now
                 </button>
               </div>
             </div>

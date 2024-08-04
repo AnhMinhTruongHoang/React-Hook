@@ -1,19 +1,30 @@
-// import _ from "lodash";
+import _ from "lodash";
 
 const Question = (props) => {
-  const { data , index} = props;
-  // if (_.isEmpty(data)) {
-  //   return (0);
-  //   console.log('dada', data)
-  // }
+  const { data, index } = props;
+  if (_.isEmpty(data)) {
+    return <></>;
+  }
 
   return (
     <>
-      <div className="question"> Question {index +1}: {data.questionDescription} ?</div>
+      <div className="q-image">
+        <img src={`data:image/jpeg;base64,${data.image}`} />
+      </div>
+      <div className="question">
+        {" "}
+        Question {index + 1}: {data.questionDescription} ?{" "}
+      </div>
+
       <div className="answer">
-        <div className="option">A.asdasda</div>
-        <div className="option">B.asdas</div>
-        <div className="option">C.sdasda</div>
+        {data.answers &&
+          data.answers.length &&
+          data.answers.map((a, index) => {
+            return(
+                <div key={`answer-${index}`}  className="a-child">{a.description}</div>
+            )
+           
+          })}
       </div>
     </>
   );

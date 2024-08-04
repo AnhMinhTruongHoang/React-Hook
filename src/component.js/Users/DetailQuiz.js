@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"; // Import các hook useEffect và useState từ React
 import { useParams, useLocation } from "react-router-dom"; // Import các hook useParams và useLocation từ react-router-dom
-import { getDataQuiz } from "../../Service/apiServices"; // Import hàm getDataQuiz từ dịch vụ API
+import { getDataQuiz, postSubmitQuiz } from "../../Service/apiServices"; // Import hàm getDataQuiz từ dịch vụ API
 import _ from "lodash"; // Import thư viện lodash
 import "./Quiz.scss"; // Import file CSS để áp dụng style
 import Question from "./Questions"; // Import component Question
+import ModalResult from "./ModalResult";
 
 // Định nghĩa component DetailQuiz
 const DetailQuiz = (props) => {
@@ -13,7 +14,8 @@ const DetailQuiz = (props) => {
   const location = useLocation(); // Sử dụng hook useLocation để lấy thông tin về vị trí hiện tại
   const [dataQuiz, setDataQuiz] = useState([]); // Khai báo state để lưu trữ dữ liệu câu hỏi
   const [index, setIndex] = useState(0); // Khai báo state để lưu trữ chỉ số câu hỏi hiện tại
-
+  const [isShowModal, setIdShowModal] = useState(false);
+  const [dataModalR, setDataModel] = useState({});
   // Sử dụng hook useEffect để thực hiện một số hành động khi component được render hoặc khi quizId thay đổi
   useEffect(() => {
     fetchQuestions(); // Gọi hàm fetchQuestions khi component được render hoặc quizId thay đổi
@@ -92,7 +94,7 @@ const DetailQuiz = (props) => {
 
   /// handleFinish
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     //   {
     //     "quizId": 1,
     //     "answers": [
@@ -125,7 +127,21 @@ const DetailQuiz = (props) => {
         });
       });
       payload.answers = answer;
-      console.log("final", payload);
+      let res = await postSubmitQuiz(payload);
+      console.log("check res ", res);
+      if (res && res.EC === 0) {
+        setDataModel({
+          
+          countCorrect: res.DT.countCorrect,
+          countTotal: res.DT.countTotal,
+          quizData : res.DT. quizData,
+          
+
+        })
+        setIdShowModal(true);
+      } else {
+        alert("something wrong... ");
+      }
     }
   };
 
@@ -160,6 +176,7 @@ const DetailQuiz = (props) => {
       </div>
       <div className="right-content">count down</div>{" "}
       {/* Hiển thị phần đếm ngược */}
+      <ModalResult show={isShowModal} setShow={setIdShowModal} dataModalR={dataModalR} />
     </div>
   );
 };

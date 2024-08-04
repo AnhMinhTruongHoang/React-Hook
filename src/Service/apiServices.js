@@ -66,18 +66,21 @@ const postLogin = (email, password) => {
   return axios.post(`/api/v1/login`, { email, password, delay: 5000 });
 };
 
-
 const getQuizByUser = () => {
-  return axios.get('/api/v1/quiz-by-participant');
-}
+  return axios.get("/api/v1/quiz-by-participant");
+};
 
-const logout = (email,refresh_token ) => {
-    return axios.post('/api/v1/logout', {email,refresh_token});
-}
+const logout = (email, refresh_token) => {
+  return axios.post("/api/v1/logout", { email, refresh_token });
+};
 
 const getDataQuiz = (id) => {
-  return axios.get(`/api/v1/questions-by-quiz?quizId=${id}`) // goi api lay data bai quiz bang id bai'
-}
+  return axios.get(`/api/v1/questions-by-quiz?quizId=${id}`); // goi api lay data bai quiz bang id bai'
+};
+
+const postSubmitQuiz = (data) => {
+  return axios.post(`/api/v1/quiz-submit`, { ...data });
+};
 
 export {
   postCreateUser,
@@ -91,4 +94,5 @@ export {
   getQuizByUser,
   logout,
   getDataQuiz,
+  postSubmitQuiz,
 }; // Xuất hàm postCreateUser để có thể sử dụng ở nơi khác

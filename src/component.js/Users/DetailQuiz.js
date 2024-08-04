@@ -17,7 +17,7 @@ const DetailQuiz = (props) => {
   // Sử dụng hook useEffect để thực hiện một số hành động khi component được render hoặc khi quizId thay đổi
   useEffect(() => {
     fetchQuestions(); // Gọi hàm fetchQuestions khi component được render hoặc quizId thay đổi
-  },[quizId]); // Mảng phụ thuộc bao gồm quizId
+  }, [quizId]); // Mảng phụ thuộc bao gồm quizId
 
   // Định nghĩa hàm fetchQuestions để lấy dữ liệu câu hỏi từ API
   const fetchQuestions = async () => {
@@ -42,7 +42,7 @@ const DetailQuiz = (props) => {
               questionDescription = item.description;
               image = item.image;
             }
-            item.answers.isSelected = false
+            item.answers.isSelected = false;
             answers.push(item.answers); // Thêm câu trả lời vào mảng câu trả lời
           });
 
@@ -64,29 +64,69 @@ const DetailQuiz = (props) => {
   };
 
   const handleCheckBox2 = (answersId, questionId) => {
-      let dataQuizClone = _.cloneDeep(dataQuiz)
-      let question = dataQuizClone.find(item => +item.questionId === +questionId)
-      if(question && question.answers){
-        question.answers = question.answers.map(item =>{
-          if(+item.id === +answersId){
-              item.isSelected = !item.isSelected;
-          }
-          return item;
-        
-        })
-       
-      }
-      let index = dataQuizClone.findIndex(item => +item.questionId === +questionId)
-      if(index > -1){
-        dataQuizClone[index] = question;
-        setDataQuiz(dataQuizClone);
-      }
-      
+    let dataQuizClone = _.cloneDeep(dataQuiz);
+    let question = dataQuizClone.find(
+      (item) => +item.questionId === +questionId
+    );
+    if (question && question.answers) {
+      question.answers = question.answers.map((item) => {
+        if (+item.id === +answersId) {
+          item.isSelected = !item.isSelected;
+        }
+        return item;
+      });
     }
+    let index = dataQuizClone.findIndex(
+      (item) => +item.questionId === +questionId
+    );
+    if (index > -1) {
+      dataQuizClone[index] = question;
+      setDataQuiz(dataQuizClone);
+    }
+  };
 
   // Định nghĩa hàm handleNext để xử lý khi nhấn nút Next
   const handleNext = () => {
     if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1); // Tăng chỉ số câu hỏi hiện tại lên 1 nếu chưa đến câu hỏi cuối cùng
+  };
+
+  /// handleFinish
+
+  const handleFinish = () => {
+    //   {
+    //     "quizId": 1,
+    //     "answers": [
+    //         {
+    //             "questionId": 1,
+    //             "userAnswerId": [3]
+    //         },
+    //         {
+    //             "questionId": 2,
+    //             "userAnswerId": [6]
+    //         }
+    //     ]
+    // }
+    console.log("check data", dataQuiz);
+    let payload = { quizId: +quizId, answers: [] };
+    let answer = [];
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((question) => {
+        let questionId = question.questionId;
+        let userAnswerId = [];
+
+        question.answers.forEach((a) => {
+          if (a.isSelected === true) {
+            userAnswerId.push(a.id);
+          }
+        });
+        answer.push({
+          questionId: +questionId,
+          userAnswerId: userAnswerId,
+        });
+      });
+      payload.answers = answer;
+      console.log("final", payload);
+    }
   };
 
   // JSX để render giao diện của component
@@ -97,7 +137,7 @@ const DetailQuiz = (props) => {
         {location?.state?.quizTitle} {/* Hiển thị tiêu đề của bài quiz */}
         <hr style={{ color: "red" }} />
         <div className="q-body">
-          <img  /> {/* Hiển thị ảnh */}
+          <img /> {/* Hiển thị ảnh */}
         </div>
         <div className="q-content">
           <Question
@@ -113,7 +153,7 @@ const DetailQuiz = (props) => {
           <button className="btn btn-primary " onClick={() => handleNext()}>
             Next {/* Nút Next để chuyển đến câu hỏi tiếp theo */}
           </button>
-          <button className="btn btn-warning " onClick={() => handleNext()}>
+          <button className="btn btn-warning " onClick={() => handleFinish()}>
             Finish {/* Nút Next để chuyển đến câu hỏi tiếp theo */}
           </button>
         </div>

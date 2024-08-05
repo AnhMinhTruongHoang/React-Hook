@@ -34,6 +34,8 @@ const ModalCreateUser= (props) => {
     if (event.target && event.target.files && event.target.files[0]) {
       setpreIMG(URL.createObjectURL(event.target.files[0])); // Tạo URL tạm thời cho hình ảnh
       setImage(event.target.files[0]); // Lưu trữ file hình ảnh vào state
+    } else{
+      
     }
   };
 

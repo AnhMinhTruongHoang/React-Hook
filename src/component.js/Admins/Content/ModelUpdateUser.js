@@ -11,7 +11,7 @@ const ModalUpdateUser = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [image, setImage] = useState("");
   const [role, setRole] = useState("USER");
   const [preIMG, setPreIMG] = useState("");
@@ -31,11 +31,11 @@ const ModalUpdateUser = (props) => {
     if (!_.isEmpty(dataUpdate)) {
       setEmail(dataUpdate.email || "");
       setPassword(dataUpdate.password || "");
-      setUserName(dataUpdate.userName || ""); 
+      setUserName(dataUpdate.username || "");
       setRole(dataUpdate.role || "USER");
       setImage(dataUpdate.image || "");
-     
-      if (dataUpdate.preIMG  || "") {
+
+      if (dataUpdate.image) {
         setPreIMG(`data:image/png;base64,${dataUpdate.image}`);
       } else {
         setPreIMG("");
@@ -52,14 +52,14 @@ const ModalUpdateUser = (props) => {
 
   const handleSubmitUser = async () => {
     console.log("Submitting user with the following details:");
-    console.log("Username:", userName);
+    console.log("Username:", username);
     console.log("Email:", email);
     console.log("Role:", role);
     console.log("Password:", password);
     console.log("Image:", image);
     console.log("User ID:", dataUpdate.id);
 
-    let data = await putUpdateUser(userName, role, image, email, dataUpdate.id);
+    let data = await putUpdateUser(username, role, image, email, dataUpdate.id);
     console.log("API response:", data);
     if (data && data.EC === 0) {
       toast.success(data.EM);
@@ -108,12 +108,12 @@ const ModalUpdateUser = (props) => {
             <input
               type="text"
               className="form-control"
-              value={userName}
+              value={username}
               onChange={(event) => setUserName(event.target.value)}
             />
           </div>
           <div className="col-md-4">
-            <label className="form-label" >Vai trò</label>
+            <label className="form-label">Vai trò</label>
             <select
               className="form-select"
               value={role}

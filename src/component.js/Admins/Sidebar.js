@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 const SideBar = (props) => {
   const { collapsed, toggled, handleToggleSidebar } = props;
   const navigate = useNavigate();
-  
+
   return (
     <>
       <ProSidebar
@@ -42,8 +42,19 @@ const SideBar = (props) => {
               whiteSpace: "nowrap",
             }}
           >
-            <FaReact  onClick={() => navigate('/')} size={"3em"} color="blue"  cursor={'pointer'} />
-            <span style={{color: 'green', cursor:'pointer',}} onClick={() => navigate('/')}> HomePage</span>
+            <FaReact
+              onClick={() => navigate("/")}
+              size={"3em"}
+              color="blue"
+              cursor={"pointer"}
+            />
+            <span
+              style={{ color: "green", cursor: "pointer" }}
+              onClick={() => navigate("/")}
+            >
+              {" "}
+              HomePage
+            </span>
           </div>
         </SidebarHeader>
 
@@ -64,10 +75,12 @@ const SideBar = (props) => {
               title="Features"
             >
               <MenuItem>
-                {" "}
                 Quản lý Users <Link to="/admins/manage-users" />
               </MenuItem>
-              <MenuItem> Quản lý Bài Quiz</MenuItem>
+              <MenuItem> 
+              Quản lý Bài Quiz <Link to="/admins/manage-quizzes" />
+              
+              </MenuItem>
               <MenuItem> Quản lý Câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
@@ -86,17 +99,14 @@ const SideBar = (props) => {
               className="sidebar-btn"
               rel="noopener noreferrer"
             >
-              <FaGithub size={'2em'} color="green" />
+              <FaGithub size={"2em"} color="green" />
               <span
                 style={{
                   whiteSpace: "nowrap",
                   textOverflow: "ellipsis",
                   overflow: "hidden",
-                 
                 }}
-              >
-               
-              </span>
+              ></span>
             </a>
           </div>
         </SidebarFooter>

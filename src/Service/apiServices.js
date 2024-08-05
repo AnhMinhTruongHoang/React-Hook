@@ -92,8 +92,14 @@ const postCreateNewQuiz = (description,name,difficulty,quizImage) => {
 
 }
 
+const getAllQuizForAdmin = () => {
+  return axios.get(`/api/v1/quiz/all`); // goi api lay data ALL bai quiz bang id bai'
+};
+
+
 export {
   postCreateNewQuiz,
+  getAllQuizForAdmin,
   postCreateUser,
   getAllUser,
   postViewUser,

@@ -96,8 +96,12 @@ const getAllQuizForAdmin = () => {
   return axios.get(`/api/v1/quiz/all`); // goi api lay data ALL bai quiz bang id bai'
 };
 
+const deleteQuizForAdmin = () => {
+  return axios.delete(`/api/v1/quiz/1`); /// delete quiz
+}
 
 export {
+  deleteQuizForAdmin,
   postCreateNewQuiz,
   getAllQuizForAdmin,
   postCreateUser,

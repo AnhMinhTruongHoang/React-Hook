@@ -3,8 +3,7 @@ import "./Admin.scss";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-
-
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 // Tạo component Admin
 const Admin = (props) => {
@@ -25,12 +24,15 @@ const Admin = (props) => {
           <FaBars onClick={() => setCollapsed(!collapsed)} />{" "}
         </div>
         {/* Khu vực hiển thị nội dung chính, sử dụng Outlet để render các component con */}
+
         <div className="admin-main">
-          <Outlet />
+          <PerfectScrollbar>
+            {" "}
+            <Outlet />
+          </PerfectScrollbar>
         </div>
       </div>
       {/* Component ToastContainer để hiển thị thông báo */}
-     
     </div>
   );
 };

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import ModalCreateUser from "./ModelCreateUser";
 import "./ModelUser.scss";
 import { FaFacebook } from "react-icons/fa";
-
 import { getAllUser, getUserWithPage } from "../../../Service/apiServices";
 import ModalViewUser from "./ModalViewUser";
 import ModelDeleteUser from "./ModalDeleteUser";
@@ -13,7 +12,7 @@ import TablePages from "./TablePages";
 const ManageUsers = (props) => {
   const limit_user = 6;
   const [pageCount, setPageCount] = useState(0);
-  const [currentPage, setcurrentPage] =useState(1)
+  const [currentPage, setcurrentPage] = useState(1);
   // Sử dụng hook useState để quản lý trạng thái của Modal
   const [showModalUser, setShowModalUser] = useState(false);
   const [listUsers, SetListUser] = useState([]);
@@ -84,13 +83,6 @@ const ManageUsers = (props) => {
           </button>
         </div>
         <div className="table-user-container">
-          {/* Bảng người dùng */}
-          {/* <TableUser
-            listuser={listUsers}
-            handerClickUpdate={handerClickUpdate}
-            handerClickView={handerClickView}
-            handerClickDelete={handerClickDelete}
-          /> */}
           <TablePages
             listuser={listUsers}
             handerClickUpdate={handerClickUpdate}

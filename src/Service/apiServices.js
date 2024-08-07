@@ -82,25 +82,37 @@ const postSubmitQuiz = (data) => {
   return axios.post(`/api/v1/quiz-submit`, { ...data });
 };
 
-const postCreateNewQuiz = (description,name,difficulty,quizImage) => {
+const postCreateNewQuiz = (description, name, difficulty, quizImage) => {
   const data = new FormData();
   data.append("description", description);
   data.append("name", name); // Ensure 'username' matches the backend field
   data.append("difficulty", difficulty);
   data.append("quizImage", quizImage);
   return axios.post("/api/v1/quiz", data);
-
-}
+};
 
 const getAllQuizForAdmin = () => {
   return axios.get(`/api/v1/quiz/all`); // goi api lay data ALL bai quiz bang id bai'
 };
 
-const deleteQuizForAdmin = () => {
-  return axios.delete(`/api/v1/quiz/1`); /// delete quiz
+const putUpdateQuizForAdmin = (id, name, description, difficulty, image) => {
+  const data = new FormData();
+  data.append('id', id);
+  data.append('description', description);
+  data.append('name', name);
+  data.append('difficulty', difficulty);
+  data.append('quizImage', image);
+  return axios.put('api/v1/quiz', data);
 }
 
+const deleteQuizForAdmin = (id) => {
+  return axios.delete(`/api/v1/quiz/${id}`);
+}
+
+
+
 export {
+  putUpdateQuizForAdmin,
   deleteQuizForAdmin,
   postCreateNewQuiz,
   getAllQuizForAdmin,

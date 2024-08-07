@@ -30,10 +30,10 @@ const TableUser = (props) => {
                   <td>{item.email}</td>
                   <td>{item.role}</td>
                   <td>
-                    <button className="btn btn-primary" onClick={ ()=> props.handerClickView(item)} >View</button>
+                    <button className="btn btn-primary" onClick={ ()=> props.handlerClickView(item)} >View</button>
                     <button className="btn btn-warning mx-3"
                      onClick={() => props.handerClickUpdate(item)}> Update </button>
-                    <button className="btn btn-danger" onClick={() => props.handerClickDelete(item) }>Delete</button>
+                    <button className="btn btn-danger" onClick={() => props.handlerClickDelete(item) }>Delete</button>
                   </td>
                 </tr>
               );
